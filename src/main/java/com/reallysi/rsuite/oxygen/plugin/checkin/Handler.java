@@ -30,6 +30,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang.StringEscapeUtils;
 
 import com.reallysi.rsuite.client.api.SchemaInfo;
 import com.reallysi.rsuite.client.api.impl.RsuiteRepositoryImpl;
@@ -421,6 +422,8 @@ public class Handler extends URLStreamHandler {
 				String updatedContent = new String(byteArray, encoding);
 				log.println("RE-WRITING THE SCHEMA DECLARATION...");
 				updatedContent = rewriteSchemaDeclaration(updatedContent);
+				updatedContent = StringEscapeUtils.escapeXml(updatedContent);
+
 				log.println("DTD PATH COMPLETE.");
 				
 				log.println("BYTE ARRAY SIZE:  " + byteArray.length);

@@ -43,7 +43,7 @@ public class RSuiteCheckInDialogHelper {
 			}	
 			
 		// PERFORM CHECK IN
-        if (repository.isCheckedOut(rsuiteURLParameters.getMoId())) {
+        if (repository.isCheckedOut(rsuiteURLParameters.getMoId()) && storeDialog) {
             out.println("SHOWING CHECK IN DIALOG...");
             rsuiteCheckInDialog = new RSuiteCheckInDialog(repository, rsuiteURLParameters.getMoId());
             

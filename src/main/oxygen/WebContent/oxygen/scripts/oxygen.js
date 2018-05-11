@@ -5,7 +5,7 @@ RSuite.Action({
 		debugger;
 		var moId = Ember.get(context, 'managedObject.finalManagedObject.id');
 		var open = function () {
-			window.open(RSuite.restUrl(1, 'api/@pluginId@?id=' + encodeURIComponent(moId)));
+			window.open(RSuite.restUrl(1, 'api/@pluginId@?id=' + encodeURIComponent(moId)) + '&skey=' + RSuite.model.get('session.key'));
 			RSuite.get("progressMeter").dialog("close");
 		};
 		RSuite.view.Menu.removeAll();

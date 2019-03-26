@@ -13,7 +13,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
-import java.io.StringWriter;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLStreamHandler;
@@ -167,7 +166,7 @@ public class Handler extends URLStreamHandler {
 				  String newXml = null;
 				  Map<String, Object> options = new HashMap<String, Object>();
 				  options.put("includeSchema", "true");
-				  // CONNECT TO RSUITE
+				// CONNECT TO RSUITE
 				  log.println("GETTING DOCUMENT WITH MO ID:  " + moId + "...");
 				  String document = repository.getAsString(moId, options);
 				  /*
@@ -423,7 +422,6 @@ public class Handler extends URLStreamHandler {
 				log.println("RE-WRITING THE SCHEMA DECLARATION...");
 				updatedContent = rewriteSchemaDeclaration(updatedContent);
 				updatedContent = StringEscapeUtils.escapeXml(updatedContent);
-
 				log.println("DTD PATH COMPLETE.");
 				
 				log.println("BYTE ARRAY SIZE:  " + byteArray.length);
@@ -436,7 +434,10 @@ public class Handler extends URLStreamHandler {
 				IOUtils.copy(new ByteArrayInputStream(updatedContent.getBytes(encoding)), tempOutputStream);
 				tempOutputStream.flush();
 				tempOutputStream.close();
-				repository.updateXmlFromFile(moId, tempFile);
+				
+				Map<String, Object> params = new HashMap<>();
+				params.put("isContentEscaped", true);
+				repository.updateXmlFromFile(moId, tempFile, null, null, params);
 				
 				log.println("UPDATE COMPLETE.");
 

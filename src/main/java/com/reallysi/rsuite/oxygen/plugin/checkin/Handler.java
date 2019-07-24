@@ -437,6 +437,7 @@ public class Handler extends URLStreamHandler {
 				
 				Map<String, Object> params = new HashMap<>();
 				params.put("isContentEscaped", true);
+				params.put("validateXml", true);
 				repository.updateXmlFromFile(moId, tempFile, null, null, params);
 				
 				log.println("UPDATE COMPLETE.");
